@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 
+
+const SERVER_URL = process.env.SERVER_URL || "http://localhost:5000";
+
 const Register = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -56,7 +59,7 @@ const Register = () => {
     if (!validate()) return;
 
     try {
-      const res = await fetch("http://localhost:5000/api/users/register", {
+      const res = await fetch(`${SERVER_URL}/api/users/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),

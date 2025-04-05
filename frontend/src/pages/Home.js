@@ -10,6 +10,8 @@ import {
   ClockIcon ,
 } from "@heroicons/react/24/outline";
 
+const SERVER_URL = process.env.SERVER_URL || "http://localhost:5000";
+
 // Helper
 const getDaysAgo = (dateString) => {
   const postedDate = new Date(dateString);
@@ -19,7 +21,8 @@ const getDaysAgo = (dateString) => {
   return diffDays === 0 ? "Today" : `${diffDays} day${diffDays > 1 ? "s" : ""} ago`;
 };
 
-const Home = () => {
+const Home = () => 
+  {
   const [jobs, setJobs] = useState([]);
   const [selectedJob, setSelectedJob] = useState(null);
   const [search, setSearch] = useState("");
@@ -40,7 +43,7 @@ const Home = () => {
   const fetchJobs = async (location = "") => {
     setLoading(true);
     try {
-      const res = await fetch(`http://localhost:5000/api/jobs?location=${location}`);
+      const res = await fetch(`${SERVER_URL}/api/jobs?location=${location}`);
       const data = await res.json();
       setJobs(data);
       setSelectedJob(null);
