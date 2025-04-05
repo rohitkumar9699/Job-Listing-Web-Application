@@ -13,10 +13,10 @@ const Home = () => {
   const fetchJobs = async (location = "") => {
     setLoading(true);
     try {
-      const res = await fetch(`/api/jobs?location=${location}`);
+      const res = await fetch(`http://localhost:5000/api/jobs?location=${location}`);
       const data = await res.json();
       setJobs(data);
-      setSelectedJob(null); // clear selection when search changes
+      setSelectedJob(null); // Clear selection on new fetch
     } catch (err) {
       console.error("Failed to fetch jobs", err);
     } finally {
@@ -54,7 +54,11 @@ const Home = () => {
             >
               <h3 className="font-bold">{job.title}</h3>
               <p className="text-sm text-gray-600">{job.location}</p>
-              {job.salary && <p className="text-sm text-gray-700">₹ {job.salary}</p>}
+              {job.min_exp !== undefined && job.max_exp !== undefined && (
+                <p className="text-sm text-gray-700">
+                  Experience: {job.min_exp} - {job.max_exp} yrs
+                </p>
+              )}
             </div>
           ))
         )}
@@ -65,12 +69,16 @@ const Home = () => {
         {selectedJob ? (
           <>
             <h2 className="text-2xl font-bold mb-2">{selectedJob.title}</h2>
+            <p><strong>Company:</strong> {selectedJob.company}</p>
             <p><strong>Location:</strong> {selectedJob.location}</p>
-            <p><strong>Type:</strong> {selectedJob.employmentType}</p>
-            <p><strong>Posted:</strong> {selectedJob.postedDate}</p>
+            <p><strong>Type:</strong> {selectedJob.employment_type}</p>
+            <p><strong>Posted:</strong> {new Date(selectedJob.postedDateTime).toLocaleDateString()}</p>
             <p><strong>Source:</strong> {selectedJob.source}</p>
-            <p><strong>Experience:</strong> {selectedJob.experienceRange}</p>
-            <p className="mt-4 whitespace-pre-line">{selectedJob.description}</p>
+            <p><strong>Experience:</strong> {selectedJob.experience}</p>
+            <p><strong>Job Link:</strong> <a href={selectedJob.job_link} target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">View Job</a></p>
+            {selectedJob.companyImageUrl && (
+              <img src={selectedJob.companyImageUrl} alt="Company Logo" className="mt-4 w-32" />
+            )}
           </>
         ) : (
           <p className="text-gray-600">Select a job to view details</p>
@@ -81,15 +89,3 @@ const Home = () => {
 };
 
 export default Home;
-
-
-
-// // Add this to useEffect in Home.js or main App.js if needed
-// useEffect(() => {
-//   const timeout = setTimeout(() => {
-//     sessionStorage.clear();
-//     window.location.href = "/";
-//   }, 60 * 60 * 1000); // 60 minutes
-
-//   return () => clearTimeout(timeout);
-// }, []);
