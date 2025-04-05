@@ -3,7 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 
 
-const SERVER_URL = process.env.SERVER_URL || "http://localhost:5000";
+// const SERVER_URL = process.env.SERVER_URL || "http://localhost:5000";
+const SERVER_URL = process.env.REACT_APP_SERVER_URL || "http://localhost:5000";
+
 
 
 const Login = () => {
