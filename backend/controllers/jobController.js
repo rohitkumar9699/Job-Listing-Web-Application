@@ -1,12 +1,23 @@
+// controllers/jobController.js
+
 const Job = require("../models/Job");
 
 exports.getJobs = async (req, res) => {
-  const jobs = await Job.find();
-  res.json(jobs);
-};
+  try {
+    const locationQuery = req.query.location;
 
-exports.getJobsByLocation = async (req, res) => {
-  const location = req.query.location;
-  const jobs = await Job.find({ location: new RegExp(location, "i") });
-  res.json(jobs);
+    let filter = {};
+
+    if (locationQuery) {
+      // Support multi-value locations (like "Bengaluru, Hyderabad")
+      const locations = locationQuery.split(",").map((loc) => loc.trim());
+      filter.location = { $in: locations.map((loc) => new RegExp(loc, "i")) };
+    }
+
+    const jobs = await Job.find(filter);
+    res.json(jobs);
+  } catch (err) {
+    console.error("Error fetching jobs:", err);
+    res.status(500).json({ error: "Failed to fetch jobs" });
+  }
 };

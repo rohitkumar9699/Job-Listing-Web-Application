@@ -1,8 +1,9 @@
+// routes/jobRoutes.js
+
 const express = require("express");
 const router = express.Router();
-const { getJobs, getJobsByLocation } = require("../controllers/jobController");
+const { getJobs } = require("../controllers/jobController");
 
-router.get("/", getJobs);
-router.get("/search", getJobsByLocation);
+router.get("/", getJobs); // Handles optional ?location= query
 
 module.exports = router;
