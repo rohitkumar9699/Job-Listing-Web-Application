@@ -85,8 +85,8 @@ const Home = () =>
 
       <div className="flex flex-col md:flex-row h-[calc(100vh-64px)]">
         {/* Job List Panel */}
-        <div className="md:w-1/3 bg-gray-100 p-4 overflow-y-auto border-r">
-          <div className="mb-4 sticky top-1 bg-gray-100 z-10">
+        <div className="md:w-1/3 bg-gray-100 p-0.1 overflow-y-auto border-r">
+          <div className="mb-4 sticky top-0 bg-gray-100 z-10">
             <input
               type="text"
               value={search}
