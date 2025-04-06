@@ -73,7 +73,7 @@ const Home = () =>
       {/* Header */}
       <div className="flex justify-between items-center p-4 bg-gradient-to-r from-blue-500 to-purple-500 text-white sticky top-0 z-10">
         <h1 className="text-lg sm:text-xl font-semibold">
-          Welcome, <span className="font-bold">{username}</span>
+          Welcome..!! <span className="font-bold">{username}</span>
         </h1>
         <button
           onClick={handleLogout}
