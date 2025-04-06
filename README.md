@@ -11,7 +11,7 @@ A full-stack job listing application with user authentication, job browsing, and
 - 👁️ Password Show/Hide Toggle  
 - 🌍 Location-Based Job Search (Backend Filtering)  
 - 📃 Dynamic Job Detail View  
-- 💾 Session Handling via JWT & LocalStorage  
+- 💾 Session Handling via LocalStorage  
 - 📱 Fully Responsive & Modern UI with Tailwind CSS  
 
 ---
@@ -49,7 +49,6 @@ Create a `.env` file inside `backend/` with the following content:
 ```
 PORT=5000
 MONGO_URI=your_mongodb_connection_string
-JWT_SECRET=your_secret_key
 ```
 
 ---
@@ -95,7 +94,7 @@ job-listing-app/
 │   ├── routes/
 │   │   ├── jobRoutes.js
 │   │   └── userRoutes.js
-│   ├── utils/
+│   ├── utils/   (Puprpose of this was to recover the Email passward But Not implemented yet)
 │   │   └── sendEmail.js
 │   ├── server.js
 │   └── .env

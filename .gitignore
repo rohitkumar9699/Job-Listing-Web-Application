@@ -5,6 +5,8 @@
 /.pnp
 .pnp.js
 
+# to load the large data on portal
+/scripts  
 # testing
 /coverage
 

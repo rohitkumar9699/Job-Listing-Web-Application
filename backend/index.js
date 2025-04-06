@@ -11,9 +11,9 @@ const userRoutes = require("./routes/userRoutes");
 const app = express();
 
 app.use(cors());
-app.use(express.json()); // 💥 Required for req.body parsing
+app.use(express.json()); //  Required for req.body parsing
 
-connectDB(); // 💥 Connect to MongoDB
+connectDB(); //Connect to MongoDB
 
 // Routes
 app.use("/api/jobs", jobRoutes);
